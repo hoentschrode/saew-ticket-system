@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ihre Bestellung</title>
+</head>
+<body>
+    Hallo {{ booking.first_name }} {{ booking.last_name }},
+
+    vielen Dank für Ihre Bestellung. Mit dieser E-Mail erhalten Sie Ihre Eintrittskarten:
+
+    <ul>
+    {% for ticket in tickets %}
+        <li><a href="http://{{ request.get_host }}{% url 'booking:pdf' ticket.code %}">Ticket abrufen</a>
+    {% endfor %}
+    </ul>
+</body>
+</html>

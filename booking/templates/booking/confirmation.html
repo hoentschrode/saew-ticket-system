@@ -1,0 +1,27 @@
+{% extends "booking/base.html" %}
+{% block content %}
+    <a name="order_confirmation"></a>
+    <div id="fh5co-project">
+        <div class="container">
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading  animate-box">
+                <span>Bestellung</span>
+                <h2>Vielen Dank für Ihre Bestellung</h2>
+                <p>Sie haben {{ booking.number_of_tickets }} Tickets für {{ booking.performance.title }}
+                    am {{ booking.performance.start_date }} gebucht. Die Vorstellung beginnt um {{ booking.performance.start_time }} Uhr.
+                    Diese Bestätigung wurde auch per E-Mail an {{ booking.email }} versendet.</p>
+                <p>Sie können sich ihre Tickets auch gleich hier herunterladen:</p>
+                <p>
+                    <ul>
+                        {% for ticket in tickets %}
+                            <li>
+                                <a href="{% url 'booking:pdf' ticket.code %}">Ticket {{ ticket.code }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <a href="{% url 'booking:index' %}">Zurück zur Startseite</a>
+{% endblock %}

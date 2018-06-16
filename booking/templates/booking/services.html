@@ -1,0 +1,39 @@
+{% extends "booking/base.html" %}
+{% load static %}
+{% block content %}
+    <header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url({% static 'booking/images/img_bg_1.jpg' %});">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-md-offset-0 text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeInUp">
+							<h1 class="mb30">Das Theater</h1>
+                            <h2 id="Termine">Termine:</h2>
+                            <ul id=Termine_list>
+                                {% for performance in performances %}
+                                    <li id="Termin_{{ performance.id }}">{{ performance.start_date }} | {{ performance.start_time }} Uhr</li>
+                                {% endfor %}
+                            </ul>
+                            <div class="fh5co-heading"></div>
+                            <a href="{% url 'booking:index' %}"><div id="click">Bestellen Sie jetzt Ihre Karten!</div></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+    <div id="fh5co-started">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<span>Zur Bestellung</span>
+					<h2>Bestellen</h2>
+					<p>Klicken Sie auf den Knopf, um zur Bestellung der Karten zu gelangen</p>
+					<a href="{% url 'booking:index' %}"><button type="submit" class="btn btn-default">Bestellen Sie jetzt Ihre Karten!</button></a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
