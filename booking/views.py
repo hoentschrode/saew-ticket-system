@@ -8,12 +8,14 @@ from django.views import generic, View
 from django.urls import reverse
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
+from django.conf import settings
 from .forms import BookingForm
 from .models import Performance, Booking, Ticket
 
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.utils import ImageReader
 from reportlab.lib.units import mm
+import os
 
 
 def confirmation(request, booking_code):
@@ -114,7 +116,9 @@ def pdf_view(request, ticket_code):
     response['Content-Disposition'] = 'attachment; filename="ticket.pdf"'
 
     p = Canvas(response, pagesize=(260*mm, 150*mm), pageCompression=1)
-    image_path = 'booking/static/booking/ticket.png'
+
+    image_path = 'booking/templates/booking/ticket.png'
+
     image = ImageReader(image_path)
     p.drawImage(image, 0, 0, 260*mm, 150*mm, mask='auto')
 
