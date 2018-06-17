@@ -25,13 +25,13 @@ class Performance(Base):
                 tickets_booked=Sum('booking__number_of_tickets')
             )
         else:
-            performances = cls.objects.annotate(
+            performances = cls.objects.get(pk=pk).annotate(
                 tickets_booked=Sum('booking__number_of_tickets')
-            ).get(pk=pk)
+            )
         return performances
 
     def tickets_available(self):
-        tickets_booked = Performance.objects.all().filter(id=self.id).annotate(
+        tickets_booked = Performance.objects.filter(id=self.id).annotate(
             tickets_booked=Sum('booking__number_of_tickets')
         )[0].tickets_booked
 
@@ -57,7 +57,7 @@ class Booking(Base):
         default=0,
         validators=[
             MinValueValidator(1, 'Mindestens ein Ticket'),
-            MaxValueValidator(5, 'Maximal 5 Tickets pro Buchung erlaubt')
+            MaxValueValidator(8, 'Maximal 8 Tickets pro Buchung erlaubt')
         ]
     )
     code = models.CharField(max_length=10, unique=True, blank=True)

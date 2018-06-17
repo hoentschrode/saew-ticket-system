@@ -29,6 +29,10 @@ class BookingForm(ModelForm):
             'email': 'E-Mail-Adresse'
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['performance'].choices = get_performance_choices()
+
     def is_valid(self):
         valid = super(BookingForm, self).is_valid()
         if not valid:
@@ -38,14 +42,14 @@ class BookingForm(ModelForm):
         try:
             self.performance_model = Performance.objects.get(pk=self.cleaned_data['performance'])
         except ObjectDoesNotExist:
-            self.errors['performance'] = ["Ungültige Vorstellung!"]
+            self.add_error('performance', "Ungültige Vorstellung!")
             return False
 
         # Check if enough tickets are available
         tickets_available = self.performance_model.tickets_available()
         booked_tickets = self.cleaned_data['number_of_tickets']
         if tickets_available < booked_tickets:
-            self.errors['performance'] = ['Vorstellung ist leider schon ausverkauft!']
+            self.add_error('performance', 'Vorstellung ist leider schon ausverkauft!')
             return False
 
         return valid

@@ -65,7 +65,13 @@
                         <div class="col-md-4 fh5co-widget ">
                             <h3>Hoentsch-ro.de</h3>
                             <p>Diese Webseite wurde designt von Luka Rode | 9c der Schule am Eiderwald.</p>
-                            <p><a href="{% url 'booking:index' %}">Zurück zur Startseite</a></p>
+                            {% if current_view == 'booking' %}
+                                <div class="js-top">
+                                    <a href="#" class="js-gotop">Zurück zur Startseite</i></a>
+                                </div>
+                            {% else %}
+                                <p><a href ="{% url 'booking:index' %}">Zurück zur Startseite</a></p>
+                            {% endif %}
                             <p><a href="{% url 'booking:policies' %}">Datenschutzhinweise</a></p>
                         </div>
 

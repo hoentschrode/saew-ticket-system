@@ -11,17 +11,15 @@
                     Diese Bestätigung wurde auch per E-Mail an {{ booking.email }} versendet.</p>
                 <p>Sie können sich ihre Tickets auch gleich hier herunterladen:</p>
                 <p>
-                    <ul>
-                        {% for ticket in tickets %}
-                            <li>
-                                <a href="{% url 'booking:pdf' ticket.code %}">Ticket {{ ticket.code }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    {% for ticket in tickets %}
+                        <a href="{% url 'booking:pdf' ticket.code %}">Ticket {{ ticket.code }}</a><br/>
+                    {% endfor %}
                 </p>
+                <div class="js-top">
+                    <a href="{% url 'booking:index' %}">Zurück zur Startseite</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <a href="{% url 'booking:index' %}">Zurück zur Startseite</a>
 {% endblock %}
