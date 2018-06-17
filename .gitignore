@@ -1,2 +1,4 @@
 ticket_system/settings/production.py
 ticket_system/settings/test.py
+deployment/**
+*.pyc
