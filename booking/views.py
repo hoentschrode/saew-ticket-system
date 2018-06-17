@@ -98,7 +98,12 @@ class BookingView(View):
                 }
             )
             message.attach_alternative(html_content, 'text/html')
-            message.send()          # @todo Catch ConnectionRefusedError if mail server isn't answering!
+
+            # @todo Implement proper error handling
+            try:
+                message.send()
+            except Exception:
+                pass
 
             return HttpResponseRedirect(reverse('booking:confirmation', args=(booking.code,), ))
         else:
