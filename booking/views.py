@@ -50,7 +50,7 @@ class BookingView(View):
             self.template_name,
             context={
                 'current_view': 'booking',
-                'form': BookingForm()
+                'form': self.form_class()
             }
         )
 

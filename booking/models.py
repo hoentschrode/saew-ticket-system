@@ -25,13 +25,13 @@ class Performance(Base):
                 tickets_booked=Sum('booking__number_of_tickets')
             )
         else:
-            performances = cls.objects.annotate(
+            performances = cls.objects.get(pk=pk).annotate(
                 tickets_booked=Sum('booking__number_of_tickets')
-            ).get(pk=pk)
+            )
         return performances
 
     def tickets_available(self):
-        tickets_booked = Performance.objects.all().filter(id=self.id).annotate(
+        tickets_booked = Performance.objects.filter(id=self.id).annotate(
             tickets_booked=Sum('booking__number_of_tickets')
         )[0].tickets_booked
 

@@ -12,6 +12,7 @@ def get_performance_choices():
             str(performance.tickets_available())
         )
         performance_choices.append((performance.id, title))
+    print('***** INIT ******')
     return performance_choices
 
 
@@ -28,6 +29,10 @@ class BookingForm(ModelForm):
             'number_of_tickets': 'Anzahl:',
             'email': 'E-Mail-Adresse'
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['performance'].choices = get_performance_choices()
 
     def is_valid(self):
         valid = super(BookingForm, self).is_valid()
