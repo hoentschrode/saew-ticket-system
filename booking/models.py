@@ -57,7 +57,7 @@ class Booking(Base):
         default=0,
         validators=[
             MinValueValidator(1, 'Mindestens ein Ticket'),
-            MaxValueValidator(5, 'Maximal 5 Tickets pro Buchung erlaubt')
+            MaxValueValidator(8, 'Maximal 8 Tickets pro Buchung erlaubt')
         ]
     )
     code = models.CharField(max_length=10, unique=True, blank=True)
