@@ -105,7 +105,7 @@ class BookingView(View):
             except Exception:
                 pass
 
-            return HttpResponseRedirect(reverse('booking:confirmation', args=(booking.code,), ))
+            return HttpResponseRedirect(reverse('booking:confirmation', args=(booking.code,), ) + '#order_confirmation')
         else:
             return render(request, self.template_name, context={'form': form})
 
