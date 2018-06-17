@@ -120,6 +120,10 @@ def pdf_view(request, ticket_code):
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="ticket.pdf"'
 
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfbase.ttfonts import TTFont
+    pdfmetrics.registerFont(TTFont('ComicBd', 'booking/templates/booking/comicbd.ttf'))
+
     p = Canvas(response, pagesize=(260*mm, 150*mm), pageCompression=1)
 
     image_path = 'booking/templates/booking/ticket.png'
@@ -127,7 +131,7 @@ def pdf_view(request, ticket_code):
     image = ImageReader(image_path)
     p.drawImage(image, 0, 0, 260*mm, 150*mm, mask='auto')
 
-    p.setFont('Times-Bold', 20)
+    p.setFont('ComicBd', 20)
 
     p.drawString(70*mm, 90*mm, '{},'.format(booking.last_name))
     p.drawString(70*mm, 80*mm, booking.first_name)
