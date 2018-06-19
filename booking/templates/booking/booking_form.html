@@ -1,6 +1,6 @@
 {% extends "booking/base.html" %}
 {% block content %}
-
+    <a name="booking"></a>
     <div id="fh5co-services" class="fh5co-bg-section">
 		<div class="container">
 			<div class="row row-pb-md">
@@ -35,7 +35,7 @@
                 <span>Bestellung</span>
                 <h2>Bestellen Sie hier ihre Karten</h2>
                 <p>Ihre E-Mail Adresse wird nur zur zum Senden der Karten verwendet!</p>
-                <a href="{% url 'booking:services' %}"><div id="click">Weitere Informationen zum Theater.</div></a>
+                <a href="{% url 'booking:services' %}#info"><div id="click">Weitere Informationen zum Theater.</div></a>
                 <div id="Booking">
                     <h2 id="booking_text">Buchung</h2>
                     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
