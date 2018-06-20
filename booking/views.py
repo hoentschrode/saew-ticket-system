@@ -8,6 +8,7 @@ from django.views import generic, View
 from django.urls import reverse
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
+from django.apps import apps
 import qrcode as qr
 from .forms import BookingForm
 from .models import Performance, Booking, Ticket
@@ -143,23 +144,25 @@ def pdf_view(request, ticket_code):
     p.setFont('Times-Bold', 24)
     p.drawString(192*mm, 18*mm, ticket.code)
 
-    # Create QRcode
-    qr_code = qr.QRCode(
-        version=1,
-        error_correction=qr.ERROR_CORRECT_L,
-        box_size=3,
-        border=4
-    )
+    if apps.get_app_config('booking').use_qr_codes:
 
-    verification_url = 'http://{}{}'.format(
-        request.get_host(),
-        reverse('booking:verify', args=(ticket_code,))
-    )
-    qr_code.add_data(verification_url)
-    img = qr_code.make_image(fill_color="black", back_color="white")
-    raw_img = BytesIO()
-    img.save(raw_img, format='PNG')
-    p.drawImage(ImageReader(raw_img), 220*mm, 35*mm, mask='auto')
+        # Create QRcode
+        qr_code = qr.QRCode(
+            version=1,
+            error_correction=qr.ERROR_CORRECT_L,
+            box_size=3,
+            border=4
+        )
+
+        verification_url = 'http://{}{}'.format(
+            request.get_host(),
+            reverse('booking:verify', args=(ticket_code,))
+        )
+        qr_code.add_data(verification_url)
+        img = qr_code.make_image(fill_color="black", back_color="white")
+        raw_img = BytesIO()
+        img.save(raw_img, format='PNG')
+        p.drawImage(ImageReader(raw_img), 220*mm, 35*mm, mask='auto')
 
     p.showPage()
     p.save()
