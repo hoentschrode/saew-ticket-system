@@ -8,14 +8,14 @@ from django.views import generic, View
 from django.urls import reverse
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
-from django.conf import settings
+import qrcode as qr
 from .forms import BookingForm
 from .models import Performance, Booking, Ticket
 
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.utils import ImageReader
 from reportlab.lib.units import mm
-import os
+from io import BytesIO
 
 
 def confirmation(request, booking_code):
@@ -143,6 +143,24 @@ def pdf_view(request, ticket_code):
     p.setFont('Times-Bold', 24)
     p.drawString(192*mm, 18*mm, ticket.code)
 
+    # Create QRcode
+    qr_code = qr.QRCode(
+        version=1,
+        error_correction=qr.ERROR_CORRECT_L,
+        box_size=3,
+        border=4
+    )
+
+    verification_url = 'http://{}{}'.format(
+        request.get_host(),
+        reverse('booking:verify', args=(ticket_code,))
+    )
+    qr_code.add_data(verification_url)
+    img = qr_code.make_image(fill_color="black", back_color="white")
+    raw_img = BytesIO()
+    img.save(raw_img, format='PNG')
+    p.drawImage(ImageReader(raw_img), 220*mm, 35*mm, mask='auto')
+
     p.showPage()
     p.save()
 
@@ -170,3 +188,21 @@ class PolicyView(generic.TemplateView):
     extra_context = {
         'current_view': '',
     }
+
+
+class VerificationView(View):
+    template_name = 'booking/verify.html'
+
+    def get(self, request, ticket_code=None):
+        if ticket_code is None:
+            return render(request, self.template_name, context={'ticket': None, 'checkin_ok': False})
+        try:
+            ticket = Ticket.objects.get(code=ticket_code)
+        except ObjectDoesNotExist:
+            return render(request, self.template_name, context={'ticket': None, 'checkin_ok': False})
+
+        ticket.check_in_flag = True
+        ticket.save()
+
+        return render(request, self.template_name, context={'ticket': ticket, 'checkin_ok': True})
+

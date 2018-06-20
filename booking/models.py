@@ -69,4 +69,5 @@ class Booking(Base):
 class Ticket(Base):
     code = models.CharField(max_length=10, unique=True)
     booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
+    check_in_flag = models.BooleanField(default=False)
 

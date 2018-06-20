@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket verification</title>
+</head>
+<body>
+    {% if checkin_ok %}
+        <div style="background-color:#255625;color:#ffffff;font-weight: bold">
+            <h1>Ok</h1>
+            <p>Ticket code: {{ ticket.code }}</p>
+        </div>
+    {% else %}
+        <div style="background-color:#ac2925;color:#ffffff;font-weight: bold">
+            <p>INVALID</p>
+            <p>Invalid ticket code!</p>
+        </div>
+    {% endif %}
+</body>
+</html>
