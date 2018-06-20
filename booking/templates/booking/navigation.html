@@ -8,11 +8,10 @@
             <div class="col-xs-12 text-center menu-1">
                 <ul>
                     <li {% if current_view == 'booking' %}class="active"{% endif %}>
-                        <a href="{% url 'booking:index' %}">Bestellen</a>
+                        <a href="{% url 'booking:index' %}#booking">Bestellen</a>
                     </li>
-                    <li {% if current_view == 'services' %}class="active"{% endif %}>
-                        <a href="{% url 'booking:services' %}">Über das Theater</a>
-                        <img id="logo_sae" src="{% static 'booking/images/logo.png' %}" />
+                    <li {% if current_view == 'services' %} class="active"{% endif %}>
+                        <a href="{% url 'booking:services' %}#info">Über das Theater</a>
                     </li>
                 </ul>
             </div>
