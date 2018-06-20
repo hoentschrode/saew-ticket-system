@@ -162,7 +162,7 @@ def pdf_view(request, ticket_code):
         img = qr_code.make_image(fill_color="black", back_color="white")
         raw_img = BytesIO()
         img.save(raw_img, format='PNG')
-        p.drawImage(ImageReader(raw_img), 220*mm, 35*mm, mask='auto')
+        p.drawImage(ImageReader(raw_img), 210*mm, 35*mm, mask='auto')
 
     p.showPage()
     p.save()
