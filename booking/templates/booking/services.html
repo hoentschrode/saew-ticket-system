@@ -1,6 +1,7 @@
 {% extends "booking/base.html" %}
 {% load static %}
 {% block content %}
+    <a name="info"></a>
     <header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url('{% static 'booking/images/img_bg_1.jpg' %}'');">
 		<div class="overlay"></div>
 		<div class="container">
@@ -16,7 +17,7 @@
                                 {% endfor %}
                             </ul>
                             <div class="fh5co-heading"></div>
-                            <a href="{% url 'booking:index' %}"><div id="click">Bestellen Sie jetzt Ihre Karten!</div></a>
+                            <a href="{% url 'booking:index' %}#booking"><div id="click">Bestellen Sie jetzt Ihre Karten!</div></a>
 						</div>
 					</div>
 				</div>
