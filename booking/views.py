@@ -41,6 +41,34 @@ def create_code():
     return ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(10))
 
 
+def send_confirmation_mail(request, booking):
+    # Send confirmation mail
+    subject = 'Ihre Bestellung'
+
+    html_content = render_to_string('booking/mail.html', context={
+        'request': request,
+        'booking': booking,
+        'tickets': booking.ticket_set.all()
+    })
+    text_content = strip_tags(html_content)
+
+    message = EmailMultiAlternatives(
+        subject='Ihre Bestellung',
+        body=text_content,
+        to=[booking.email],
+        headers={
+            'Message-ID': 'foo'
+        }
+    )
+    message.attach_alternative(html_content, 'text/html')
+
+    # @todo Implement proper error handling
+    try:
+        message.send()
+    except Exception:
+        pass
+
+
 class BookingView(View):
     form_class = BookingForm
     template_name = "booking/booking_form.html"
@@ -79,31 +107,7 @@ class BookingView(View):
                 ticket.save()
                 tickets.append(ticket)
 
-            # Send confirmation mail
-            subject = 'Ihre Bestellung'
-
-            html_content = render_to_string('booking/mail.html', context={
-                'request': request,
-                'booking': booking,
-                'tickets': tickets
-            })
-            text_content = strip_tags(html_content)
-
-            message = EmailMultiAlternatives(
-                subject='Ihre Bestellung',
-                body=text_content,
-                to=[booking.email],
-                headers={
-                    'Message-ID': 'foo'
-                }
-            )
-            message.attach_alternative(html_content, 'text/html')
-
-            # @todo Implement proper error handling
-            try:
-                message.send()
-            except Exception:
-                pass
+            send_confirmation_mail(request, booking)
 
             return HttpResponseRedirect(reverse('booking:confirmation', args=(booking.code,), ) + '#order_confirmation')
         else:
@@ -208,3 +212,13 @@ class VerificationView(View):
 
         return render(request, self.template_name, context={'ticket': ticket, 'checkin_ok': True})
 
+
+class ResendConfirmationMail(View):
+
+    def get(self, request, booking_code):
+        try:
+            booking = Booking.objects.get(code=booking_code)
+            send_confirmation_mail(request, booking)
+            return HttpResponseRedirect(reverse('booking:confirmation', args=(booking.code,), ) + '#order_confirmation')
+        except ObjectDoesNotExist:
+            return render(request, 'booking/invalid_ticket_code.html')

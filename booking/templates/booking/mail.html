@@ -2,21 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ihre Bestellung</title>
+    <title>Theaterkarten Bestellbestätigung</title>
 </head>
 <body>
     <p>
-        Hallo {{ booking.first_name }} {{ booking.last_name }},<br/>
-        vielen Dank für Ihre Bestellung. Mit dieser E-Mail erhalten Sie Ihre Eintrittskarten:
+        Sie haben {{ booking.number_of_tickets }} Ticket{% if  booking.number_of_tickets > 1 %}s{% endif %} für die Vorstellung &quot;{{ booking.performance.title }}&quot;
+        am {{ booking.performance.start_date }} um {{ booking.performance.start_time }} Uhr bestellt.
+    </p>
+    <p>
+        Laden Sie Ihre Tickets ganz einfach herunter, durch einen einfachen Klick auf den folgenden Link:
     </p>
 
-    <ul>
+    <ul style="list-style: None">
     {% for ticket in tickets %}
-        <li><a href="http://{{ request.get_host }}{% url 'booking:pdf' ticket.code %}">Ticket abrufen</a>
+        <li style="list-style: None"><a href="http://{{ request.get_host }}{% url 'booking:pdf' ticket.code %}">Ticket abrufen</a>
     {% endfor %}
     </ul>
 
     <p>
+        Drucken sie die Tickets aus oder bringen sie ganz einfach ihr Handy mit dem pdf mit und zeigen es am Einlass vor.
+
+        Wir freuen uns auf Ihren Besuch!
+
+        Mit freundlichen Grüßen,
+        Der Gestaltenkurs der 9. Klassen.
         <i>Bitte antworten Sie nicht auf diese Mail, da diese automatisch erstellt wurde!</i>
     </p>
 </body>
