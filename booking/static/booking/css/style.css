@@ -1735,7 +1735,9 @@ ul.Tutorial {
     list-style: circle;   
 }
 
-
+.Tutorial {
+    font-size: 20px;
+}
 
 .little-placeholder {
   margin-bottom: 0.5em;
