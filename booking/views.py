@@ -90,10 +90,9 @@ class BookingView(View):
             text_content = strip_tags(html_content)
 
             message = EmailMultiAlternatives(
-                'Ihre Bestellung',
-                text_content,
-                'tickets@localhost',
-                [booking.email],
+                subject='Ihre Bestellung',
+                body=text_content,
+                to=[booking.email],
                 headers={
                     'Message-ID': 'foo'
                 }

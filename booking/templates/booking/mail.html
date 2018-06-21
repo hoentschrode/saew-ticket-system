@@ -5,14 +5,19 @@
     <title>Ihre Bestellung</title>
 </head>
 <body>
-    Hallo {{ booking.first_name }} {{ booking.last_name }},
-
-    vielen Dank für Ihre Bestellung. Mit dieser E-Mail erhalten Sie Ihre Eintrittskarten:
+    <p>
+        Hallo {{ booking.first_name }} {{ booking.last_name }},<br/>
+        vielen Dank für Ihre Bestellung. Mit dieser E-Mail erhalten Sie Ihre Eintrittskarten:
+    </p>
 
     <ul>
     {% for ticket in tickets %}
         <li><a href="http://{{ request.get_host }}{% url 'booking:pdf' ticket.code %}">Ticket abrufen</a>
     {% endfor %}
     </ul>
+
+    <p>
+        <i>Bitte antworten Sie nicht auf diese Mail, da diese automatisch erstellt wurde!</i>
+    </p>
 </body>
 </html>
