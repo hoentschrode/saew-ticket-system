@@ -29,6 +29,7 @@
 		</div>
 	</div>
 
+    <a name="booking_form"></a>
     <div id="fh5co-project">
 		<div class="container">
             <div class="col-md-8 col-md-offset-2 text-center fh5co-heading  animate-box" data-animate-effect="fadeInUp">
@@ -39,7 +40,7 @@
                 <div id="Booking">
                     <h2 id="booking_text">Buchung</h2>
                     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-                    <form id="booking_questions" action="{% url 'booking:index' %}" method="post">
+                    <form id="booking_questions" action="{% url 'booking:index' %}#booking_form" method="post">
                         {% csrf_token %}
                         <table>
                             {% for field in form.visible_fields %}

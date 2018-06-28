@@ -1,4 +1,4 @@
-from django.forms import ModelForm, ChoiceField
+from django.forms import ModelForm, ChoiceField, CharField
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Booking, Performance
 
@@ -17,11 +17,12 @@ def get_performance_choices():
 
 class BookingForm(ModelForm):
     performance = ChoiceField(choices=get_performance_choices(), label='Vorstellung')
+    email_confirmation = CharField(max_length=254, required=True, label='E-Mail (zur Bestätigung)')
     performance_model = None
 
     class Meta:
         model = Booking
-        fields = ['first_name', 'last_name', 'number_of_tickets', 'email']
+        fields = ['first_name', 'last_name', 'number_of_tickets', 'email', 'email_confirmation']
         labels = {
             'first_name': 'Vorname',
             'last_name': 'Nachname',
@@ -37,6 +38,11 @@ class BookingForm(ModelForm):
         valid = super(BookingForm, self).is_valid()
         if not valid:
             return valid
+
+        # Check mail confirmation
+        if self.cleaned_data['email'] != self.cleaned_data['email_confirmation']:
+            self.add_error('email', 'Bitte überprüfen Sie die E-Mail-Adresse')
+            return False
 
         # Check valid performance
         try:
