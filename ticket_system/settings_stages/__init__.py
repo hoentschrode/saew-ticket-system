@@ -126,6 +126,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'EMAIL_HOST'
 EMAIL_PORT = 1025
 
+RUN_IN_RENOVATION_MODE = True
+
 if DJANGO_STAGE.lower() == "dev":
     from .local import *
 elif DJANGO_STAGE.lower() == 'test':

@@ -14,13 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import re_path, path, include
 from django.views.generic.base import RedirectView
+from django.conf import settings
 
-
-urlpatterns = [
-    path('', RedirectView.as_view(url='/booking')),
-    path('booking/', include('booking.urls')),
-    path('closed/', include('closed_for_renovation.urls')),
-    path('admin/', admin.site.urls),
-]
+# Redirect anything to renovation app if renovation mode is active
+if settings.RUN_IN_RENOVATION_MODE:
+    urlpatterns = [
+        re_path(r'^(?P<url>.*)$', include('closed_for_renovation.urls'))
+    ]
+else:
+    urlpatterns = [
+        path('', RedirectView.as_view(url='/booking')),
+        path('booking/', include('booking.urls')),
+        path('closed/', include('closed_for_renovation.urls')),
+        path('admin/', admin.site.urls),
+    ]
