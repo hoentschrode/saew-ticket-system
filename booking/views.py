@@ -71,7 +71,7 @@ def send_confirmation_mail(request, booking):
 
 class BookingView(View):
     form_class = BookingForm
-    template_name = "booking/booking_form.html"
+    template_name = "booking/base.html"
 
     def get(self, request, *args, **kwargs):
         return render(
@@ -171,29 +171,6 @@ def pdf_view(request, ticket_code):
     p.save()
 
     return response
-
-
-class ServiceView(View):
-    template_name = "booking/services.html"
-
-    def get(self, request):
-        performances = Performance.get_with_tickets_available()
-
-        return render(
-            request,
-            self.template_name,
-            context={
-                'current_view': 'services',
-                'performances': performances
-            }
-        )
-
-
-class PolicyView(generic.TemplateView):
-    template_name = "booking/policies.html"
-    extra_context = {
-        'current_view': '',
-    }
 
 
 class VerificationView(View):

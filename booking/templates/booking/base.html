@@ -1,112 +1,922 @@
 {% load static %}
-<!DOCTYPE HTML>
-<html>
-	<head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Theater | Alles Märchen - der was?</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <meta name="author" content="" />
+<!DOCTYPE html>
+<html lang="de">
 
-        <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Animate.css -->
-        <link rel="stylesheet" href="{% static 'booking/css/animate.css' %}">
-        <!-- Icomoon Icon Fonts-->
-        <link rel="stylesheet" href="{% static 'booking/css/icomoon.css' %}">
-        <!-- Bootstrap  -->
-        <link rel="stylesheet" href="{% static 'booking/css/bootstrap.css' %}">
+	<title>Romeo und Julia | Theater des WPU Gestalten der Jahrgänge 10 und 7</title>
 
-        <!-- Magnific Popup -->
-        <link rel="stylesheet" href="{% static 'booking/css/magnific-popup.css' %}">
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
 
-        <!-- Theme style  -->
-        <link rel="stylesheet" href="{% static 'booking/css/style.css' %}">
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="{% static 'booking/css/bootstrap.min.css' %}" />
 
-        <!-- Modernizr JS -->
-        <script src="{% static 'booking/js/modernizr-2.6.2.min.js' %}"></script>
-        <!-- FOR IE9 below -->
-        <!--[if lt IE 9]>
-        <script src="{% static 'booking/js/respond.min.js' %}"></script>
-        <![endif]-->
+	<!-- Owl Carousel -->
+	<link type="text/css" rel="stylesheet" href="{% static 'booking/css/owl.carousel.css' %}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'booking/css/owl.theme.default.css' %}" />
 
-    </head>
-    <body>
-        <div class="fh5co-loader"></div>
+	<!-- Magnific Popup -->
+	<link type="text/css" rel="stylesheet" href="{% static 'booking/css/magnific-popup.css' %}" />
 
-        <div id="page">
-            {% include 'booking/navigation.html' %}
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="{% static 'booking/css/font-awesome.min.css' %}">
 
-            <header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url({% static 'booking/images/img_bg_1.jpg' %});">
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 col-md-offset-0 text-center">
-                            <div class="display-t">
-                                <div class="display-tc animate-box" data-animate-effect="fadeInUp">
-                                    <h1 class="logo_text">Alles Märchen - oder was?</h1>
-                                    <img id="Logo" src="{% static 'booking/images/theater.jpg' %}">
-                                    <p id="Ld">Bild: Lilith und der Prinz von Michael Ferner</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="{% static 'booking/css/style.css' %}" />
 
-            {% block content %}
-            {% endblock %}
+	<!-- Icon -->
+	<link rel="shortcut icon" href="{% static 'booking/img/icon.ico' %}"/>
+</head>
 
-            <footer id="fh5co-footer" role="contentinfo">
-                <div class="container">
-                    <div class="row row-pb-md">
-                        <div class="col-md-4 fh5co-widget ">
-                            <h3>Hoentsch-ro.de</h3>
-                            <p>Diese Webseite wurde designt von Luka Rode | 9c der Schule am Eiderwald.</p>
-                            {% if current_view == 'booking' %}
-                                <div class="js-top">
-                                    <a href="#" class="js-gotop">Zurück zur Startseite</i></a>
-                                </div>
-                            {% else %}
-                                <p><a href ="{% url 'booking:index' %}">Zurück zur Startseite</a></p>
-                            {% endif %}
-                            <p><a href="{% url 'booking:policies' %}#policies">Datenschutzhinweise</a></p>
-                        </div>
+<body>
+	<!-- Header -->
+	<header id="home">
+		<!-- Background Image -->
+		<div class="bg-img" style="background-image: url({% static 'booking/img/background1.jpg' %});">
+			<div class="overlay"></div>
+		</div>
+		<!-- /Background Image -->
 
-                        <div class="row copyright">
-                            <div class="col-md-12 text-center">
-                                <p>
-                                    <small class="block">&copy; 2018 Luka. All Rights Reserved.</small>
-                                    <small class="block">Designt by Luka Rode | 9c der Schule am Eiderwald</small>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+		<!-- Nav -->
+		<nav id="nav" class="navbar nav-transparent">
+			<div class="container">
 
-        </div>
+				<div class="navbar-header">
+					<!-- Logo -->
+					<div class="navbar-brand">
+						<a href="{% url 'booking:index' %}">
+							<img class="logo" src="{% static 'booking/img/logo.png' %}" alt="logo">
+							<img class="logo-alt" src="{% static 'booking/img/logo.png' %}" alt="logo">
+						</a>
+					</div>
+					<!-- /Logo -->
 
-        <div class="gototop js-top">
-            <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-        </div>
+					<!-- Collapse nav button -->
+					<div class="nav-collapse">
+						<span></span>
+					</div>
+					<!-- /Collapse nav button -->
+				</div>
 
-        <!-- jQuery -->
-        <script src="{% static 'booking/js/jquery.min.js' %}"></script>
-        <!-- jQuery Easing -->
-        <script src="{% static 'booking/js/jquery.easing.1.3.js' %}"></script>
-        <!-- Bootstrap -->
-        <script src="{% static 'booking/js/bootstrap.min.js' %}"></script>
-        <!-- Waypoints -->
-        <script src="{% static 'booking/js/jquery.waypoints.min.js' %}"></script>
-        <!-- countTo -->
-        <script src="{% static 'booking/js/jquery.countTo.js' %}"></script>
-        <!-- Magnific Popup -->
-        <script src="{% static 'booking/js/jquery.magnific-popup.min.js' %}"></script>
-        <script src="{% static 'booking/js/magnific-popup-options.js' %}"></script>
-        <!-- Main -->
-        <script src="{% static 'booking/js/main.js' %}"></script>
-    </body>
+				<!--  Main navigation  -->
+				<ul class="main-nav nav navbar-nav navbar-right">
+					<li><a href="#home">Start</a></li>
+					<li><a href="#about">Über das Theater</a></li>
+					<li><a href="#portfolio">Galerie</a></li>
+					<li><a href="#service">Protagonisten</a></li>
+					<li><a href="#pricing">Anleitung</a></li>
+					<li><a href="#team">Technik</a></li>
+					<li><a href="#blog">Ort der Veranstaltung</a></li>
+					<li><a href="#contact">Kostenlos Bestellen</a></li>
+				</ul>
+				<!-- /Main navigation -->
+
+			</div>
+		</nav>
+		<!-- /Nav -->
+
+		<!-- home wrapper -->
+		<div class="home-wrapper">
+			<div class="container">
+				<div class="row">
+
+					<!-- home content -->
+					<div class="col-md-10 col-md-offset-1">
+						<div class="home-content">
+							<h1 class="white-text">
+								Romeo & Julia
+								<p>und</p>
+								<p>Julia & Romeo </p> </h1>
+								<h2 class="white-text">Crossover</h2>
+							<p class="white-text">Auf dieser Webseite können Sie Ihre Karten für das Theater des Gestaltenkurses der Jahrgänge 10 und 7 vorbestellen und mehr über das Theater erfahren.</p>
+							<a href="#contact"><button class="white-btn">Bestellen</button></a>
+							<a href="#service"><button class="white-btn">Mehr Informationen</button></a>
+						</div>
+					</div>
+					<!-- /home content -->
+
+				</div>
+			</div>
+		</div>
+		<!-- /home wrapper -->
+
+	</header>
+	<!-- /Header -->
+
+	<!-- About -->
+	<div id="about" class="section md-padding">
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<!-- Section header -->
+				<div class="section-header text-center">
+					<h2 class="title">Willkommen</h2>
+				</div>
+				<!-- /Section header -->
+
+				<!-- about -->
+				<div class="col-md-4">
+					<div class="about">
+						<i class="fa fa-cogs"></i>
+						<h3>Zusammenspiel</h3>
+						<p>Die Schülerinnen und Schüler des 10. Jahrgangs haben zusammen mit dem 7. Jahrgang in Harmonie und mit ganz viel Freude ein tolles Theaterstück kreiert!</p>
+						<!-- <a href="#">Read more</a> -->
+					</div>
+				</div>
+				<!-- /about -->
+
+				<!-- about -->
+				<div class="col-md-4">
+					<div class="about">
+						<i class="fa fa-magic"></i>
+						<h3>Danke an...</h3>
+						<p>... den Verein der Freunde für</p>
+						<p>für die zahlreiche</p>
+						<p>Unterstützung!</p>
+						<!--<a href="#">Read more</a>-->
+					</div>
+				</div>
+				<!-- /about -->
+
+				<!-- about -->
+				<div class="col-md-4">
+					<div class="about">
+						<i class="fa fa-mobile"></i>
+						<h3>Modern trifft auf Klassik</h3>
+						<p>Die Schülerinnen und Schüler stellen ein wirklichen Klassiker in ihrer ganz eigenen Form zusammen, ohne jedoch dabei von der klassischen Handlung abzukommen.</p>
+						<!--<a href="#">Read more</a>-->
+					</div>
+				</div>
+				<!-- /about -->
+				<h2 class="text-center">Lassen Sie sich überraschen!</h2>
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</div>
+	<!-- /About -->
+
+
+	<!-- Portfolio -->
+	<div id="portfolio" class="section md-padding bg-grey">
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<!-- Section header -->
+				<div class="section-header text-center">
+					<h2 class="title">Ein Blick hinter die Kulissen</h2>
+				</div>
+				<!-- /Section header -->
+
+				<!-- Work -->
+				<div class="col-md-4 col-xs-6 work">
+					<img class="img-responsive" src="{% static 'booking/img/work1.jpg' %}" alt="">
+					<div class="overlay"></div>
+					<div class="work-content">
+						<span>Alex Gutzeit</span>
+						<h3>Tonaufnahmen für Radio & Tagebuch</h3>
+						<div class="work-link">
+							<a class="lightbox" href="{% static 'booking/img/work1.jpg' %}"><i class="fa fa-search"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- /Work -->
+
+				<!-- Work -->
+				<div class="col-md-4 col-xs-6 work">
+					<img class="img-responsive" src="{% static 'booking/img/work2.jpg' %}" alt="">
+					<div class="overlay"></div>
+					<div class="work-content">
+						<span>Leonie Krauthammer</span>
+						<h3>Tanz</h3>
+						<div class="work-link">
+							<a class="lightbox" href="{% static 'booking/img/work2.jpg' %}"><i class="fa fa-search"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- /Work -->
+
+				<!-- Work -->
+				<div class="col-md-4 col-xs-6 work">
+					<img class="img-responsive" src="{% static 'booking/img/work3.jpg' %}" alt="">
+					<div class="overlay"></div>
+					<div class="work-content">
+						<span>Ida Sentz</span>
+						<h3>Einüben vom Text</h3>
+						<div class="work-link">
+							<a class="lightbox" href="{% static 'booking/img/work3.jpg' %}"><i class="fa fa-search"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- /Work -->
+
+				<!-- Work -->
+				<div class="col-md-4 col-xs-6 work">
+					<img class="img-responsive" src="{% static 'booking/img/work4.jpg' %}" alt="">
+					<div class="overlay"></div>
+					<div class="work-content">
+						<span>Luka Rode</span>
+						<h3>Entwicklung der Webseite</h3>
+						<div class="work-link">
+							<a class="lightbox" href="{% static 'booking/img/work4.jpg' %}"><i class="fa fa-search"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- /Work -->
+
+				<!-- Work -->
+				<div class="col-md-4 col-xs-6 work">
+					<img class="img-responsive" src="{% static 'booking/img/work5.jpg' %}" alt="">
+					<div class="overlay"></div>
+					<div class="work-content">
+						<span>Florian Dankmer</span>
+						<h3>Tonaufnahmen</h3>
+						<div class="work-link">
+							<a class="lightbox" href="{% static 'booking/img/work5.jpg' %}"><i class="fa fa-search"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- /Work -->
+
+				<!-- Work -->
+				<div class="col-md-4 col-xs-6 work">
+					<img class="img-responsive" src="{% static 'booking/img/work6.jpg' %}" alt="">
+					<div class="overlay"></div>
+					<div class="work-content">
+						<span>Jacob Jüttner & Tom Nickoleit & Alex Gutzeit</span>
+						<h3>Pause</h3>
+						<div class="work-link">
+							<a class="lightbox" href="{% static 'booking/img/work6.jpg' %}"><i class="fa fa-search"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- /Work -->
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</div>
+	<!-- /Portfolio -->
+
+	<!-- Service -->
+	<div id="service" class="section md-padding">
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<!-- Section header -->
+				<div class="section-header text-center">
+					<h2 class="title">Protagonisten</h2>
+				</div>
+				<!-- /Section header -->
+
+				<ul class="list-group list-group-flush">
+					<div class="list-group"><a href="#" class="list-group-item list-group-item-action list-group-item-dark">10. Jahrgang</a></div>
+					<li class="list-group-item">Emily Seelmann</li>
+					<li class="list-group-item">Angelina Janetzki</li>
+					<li class="list-group-item">Jacob Jüttner</li>
+					<li class="list-group-item">Gina Knese</li>
+					<li class="list-group-item">Tom Nickoleit</li>
+					<li class="list-group-item">Ida Sentz</li>
+					<li class="list-group-item">Alexander Nicke</li>
+					<li class="list-group-item">Lilan Joli</li>
+					<li class="list-group-item">Milena Schok</li>
+					<li class="list-group-item">Alicia Steffen</li>
+					<li class="list-group-item">Lina Fraij</li>
+					<li class="list-group-item">Alex Gutzeit</li>
+					<li class="list-group-item">Leonie Krauthammer</li>
+					<li class="list-group-item">Lea Diester</li>
+					<li class="list-group-item">Lea Schemborski</li>
+				</ul>
+					<div class="list-group"><a href="#" class="list-group-item list-group-item-action list-group-item-dark">7. Jahrgang</a></div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">Moritz Ertelt</li>
+					<li class="list-group-item">Carolina Frank</li>
+					<li class="list-group-item">Jennys Rudat</li>
+					<li class="list-group-item">Lukas Klug</li>
+					<li class="list-group-item">Tim Keller</li>
+					<li class="list-group-item">Jürgen Grass</li>
+					<li class="list-group-item">Leni Sentz</li>
+					<li class="list-group-item">Jonna Lorenz</li>
+					<li class="list-group-item">Lilli Tietgen</li>
+					<li class="list-group-item">Anna Kühne</li>
+					<li class="list-group-item">Luca Matthews</li>
+					<li class="list-group-item">Kevin Schulz</li>
+					<li class="list-group-item">Ryan Witulski</li>
+				</ul>
+				<ul class="list-group list-group-flush">
+					<div class="list-group"><a href="#" class="list-group-item list-group-item-action list-group-item-dark">Technik Team</a></div>
+					<li class="list-group-item">Florian Dankmer</li>
+					<li class="list-group-item">Luka Rode</li>
+				</ul>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">Tjorge Callsen</li>
+					<li class="list-group-item">Rob Mittelstedt</li>
+				</ul>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">Annette Braak</li>
+				</ul>
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</div>
+	<!-- /Service -->
+
+
+	<!-- Why Choose Us -->
+	<div id="features" class="section md-padding bg-grey">
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<!-- why choose us content -->
+				<div class="col-md-6">
+					<div class="section-header">
+						<h2 class="title">Romeo & Julia und<p></p>Julia & Romeo</h2>
+					</div>
+					<p>Romeo und Julia gelten als das berühmteste Liebespaar der Weltliteratur. Der Gestaltenkurs der
+						Jahrgangsstufe 10 unter Mitwirkung der Jahrgangsstufe 7 hat sich zum Abschluss ihres Kurses
+						vorgenommen, den schon zahlreich in Bühnenaufführungen und Filmen verarbeiteten Stoff in einer neuen
+						eigenen Version auf die Bühne zu bringen.
+						In Anlehnung an das Original wird die gekürzte ursprüngliche Handlung der Tragödie -sozusagen
+						crossover- parallel und abwechselnd in die heutige Zeit übertragen.
+						William Shakespeares Tragödie „Romeo und Julia“ wurde 1597 zum ersten Mal in London aufgeführt.
+						Die jeweils einzigen Kinder der mächtigen Familien Montague und Capulet in Verona verlieben sich
+						ineinander, aber die lange bestehende Feindschaft zwischen den Familien beschwert ihre Liebe und treibt
+						Romeo und Julia in den Selbstmord. Erst danach versöhnen sich die Familien.
+						Die Motive für das Stück reichen bis in die Dramen der Antike zurück, sind aber bis in die heutige Zeit
+						ein immer wiederkehrendes Thema.
+						Durch unsere Aufführung erfolgt eine Spiegelung in die heutige Zeit und zeigt eine immerwährende
+						Übertragbarkeit von Liebesbeziehungen in alle Gesellschaftsebenen.
+						Welche Faktoren könnten hierbei heutzutage eine Rolle spielen?</p>
+					<div class="feature">
+						<i class="fa fa-anchor"></i>
+						<p>Religion?</p>
+					</div>
+					<div class="feature">
+						<i class="fa fa-dollar"></i>
+						<p>Arm oder Reich?</p>
+					</div>
+					<div class="feature">
+						<i class="fa fa-female"></i>
+						<p>Gender/Homosexualität?</p>
+					</div>
+					<div class="feature">
+						<i class="fa fa-key"></i>
+						<p>Verbotene Liebe?</p>
+					</div>
+					<div class="feature">
+						<i class="fa fa-bookmark"></i>
+						<p>Kulturkreis?</p>
+					</div>
+					<h4>Wir wünschen Ihnen einen spannenden und unterhaltsamen Theaterabend an unserer Schule!</h4>
+				</div>
+				<!-- /why choose us content -->
+
+				<!-- About slider -->
+				<div class="col-md-6">
+					<div id="about-slider" class="owl-carousel owl-theme">
+						<img class="img-responsive" src="{% static 'booking/img/about1.jpg' %}" alt="">
+						<img class="img-responsive" src="{% static 'booking/img/about2.jpg' %}" alt="">
+						<img class="img-responsive" src="{% static 'booking/img/about3.jpg' %}" alt="">
+						<img class="img-responsive" src="{% static 'booking/img/about4.jpg' %}" alt="">
+						<img class="img-responsive" src="{% static 'booking/img/about5.jpg' %}" alt="">
+					</div>
+				</div>
+				<!-- /About slider -->
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</div>
+	<!-- /Why Choose Us -->
+
+
+	<!-- Numbers -->
+	<div id="numbers" class="section sm-padding">
+
+		<!-- Background Image -->
+		<div class="bg-img" style="background-image: url({% static 'booking/img/background2.jpg' %});">
+			<div class="overlay"></div>
+		</div>
+		<!-- /Background Image -->
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<!-- number -->
+				<div class="col-sm-3 col-xs-6">
+					<div class="number">
+						<i class="fa fa-users"></i>
+						<h3 class="white-text"><span class="counter">0</span></h3>
+						<span class="white-text">Karten bestellt</span>
+					</div>
+				</div>
+				<!-- /number -->
+
+				<!-- number -->
+				<div class="col-sm-3 col-xs-6">
+					<div class="number">
+						<i class="fa fa-trophy"></i>
+						<h3 class="white-text"><span class="counter">200</span></h3>
+						<span class="white-text">Verfügbare Karten</span>
+					</div>
+				</div>
+				<!-- /number -->
+
+				<!-- number -->
+				<div class="col-sm-3 col-xs-6">
+					<div class="number">
+						<i class="fa fa-pencil"></i>
+						<h3 class="white-text"><span class="counter">100</span></h3>
+						<span class="white-text">Freie Karten für Vorstellung 1</span>
+					</div>
+				</div>
+				<!-- /number -->
+
+				<!-- number -->
+				<div class="col-sm-3 col-xs-6">
+					<div class="number">
+						<i class="fa fa-pencil"></i>
+						<h3 class="white-text"><span class="counter">100</span></h3>
+						<span class="white-text">Freie Karten für Vorstellung 2</span>
+					</div>
+				</div>
+				<!-- /number -->
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</div>
+	<!-- /Numbers -->
+
+	<!-- Pricing -->
+	<div id="pricing" class="section md-padding">
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<!-- Section header -->
+				<div class="section-header text-center">
+					<h2 class="title">Anleitungen</h2>
+				</div>
+				<!-- /Section header -->
+					<h3 class="text-center">Sie wissen nicht wie sie die Karten buchen können, was danach passiert oder was sie mit der gebuchten Karte machen sollen? Dann klicken Sie hier und sehen Sie sich unsere umfangreiche Anleitung an.</h3>
+
+
+				<button type="button" class="btn btn-primary btn-lg center-block" data-toggle="modal" data-target="#instructions">Zur Anleitung</button>
+							<!-- Modal -->
+							<div class="modal fade" id="instructions" tabindex="-1" role="dialog" aria-labelledby="instructionsLongTitle" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+								<div class="modal-content">
+								  <div class="modal-header">
+									<h5 class="modal-title" id="instructionsLongTitle">Anleitung</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									  <span aria-hidden="true">&times;</span>
+									</button>
+								  </div>
+								  <div class="modal-body">
+									<strong>Wie buche ich die Karten?</strong>
+									 <p></p>
+									<p>Zum buchen der Karten gehen Sie einfach auf den Reiter "Kostenlos Bestellen" oben Rechts der Webseite oder scrollen Sie nach ganz unten. Dort finden Sie einen Knopf, der Sie zu dem Bestellformular bringt, indem Sie aufgefordert werden folgendes einzugeben:</p>
+									<ul class="list-group list-group-flush">
+									  <li class="list-group-item">Vorname</li>
+									  <li class="list-group-item">Nachname</li>
+									  <li class="list-group-item">Anzahl (1 - 5)</li>
+									  <li class="list-group-item">E-Mail Adresse</li>
+									  <li class="list-group-item">Vorstellung</li>
+									</ul>
+									<p>Weitere Informationen über das speichern Ihrer Daten, finden Sie in der <u>Datenschutzerklärung</u></p>
+									<p>Bei der Vorstellung wählen Sie ihre gewünschte Vorstellung aus. Klicken Sie anschließend auf "Jetzt buchen!" und warten Sie einen kleinen Augenblick, bis Sie eine E-Mail an die angegebene E-Mail Adresse erhalten.</p>
+									<p></p>
+									<p><strong>Was nun mit der E-Mail?</strong></p>
+									<p></p>
+									<p>Wenn sie die E-Mail erhalten haben, finden Sie dort die von Ihnen bestellte/-n Karte/-n. Diese können Sie entweder ganz einfach über das Handy am Einlass vorzeigen oder Sie können die Karte ausdrucken und am Einlass vorzeigen. Bitte achten Sie bei beiden Methoden darauf, dass der QR-Code auf dem Ticket gut sichtbar ist, da dieser am Eingang gescannt werden muss.</p>
+									<p></p>
+									<p><strong>Ich habe keine E-Mail erhalten?</strong></p>
+									<p></p>
+									<p>Als ersten überprüfen Sie bitte, ob die richtige E-Mail Adresse angegeben wurde. Sollte dies der Fall sein und trotzdem kam bei Ihnen keine E-Mail an, wenden Sie sich bitte an ein Theatermitglied oder schreiben Sie mir persönlich eine kurze E-Mail.</p>
+									  <ul class="list-group list-group-flush">
+									  <li class="list-group-item">E-Mail: luka.elias.rode@gmail.com</li>
+									</ul>
+									</div>
+								  <div class="modal-footer">
+									<button type="button" class="btn btn-primary" data-dismiss="modal">Verstanden!</button>
+								  </div>
+								</div>
+							  </div>
+							</div>
+							<!-- -->
+				<p></p>
+				<p></p>
+				<button type="button" class="btn btn-primary btn-lg center-block" data-toggle="modal" data-target="#secruity">Datenschutz</button>
+							<!-- Modal -->
+							<div class="modal fade" id="secruity" tabindex="-1" role="dialog" aria-labelledby="secruityLongTitle" aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+								<div class="modal-content">
+								  <div class="modal-header">
+									<h5 class="modal-title" id="secruityLongTitle">Datenschutzhinweise</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									  <span aria-hidden="true">&times;</span>
+									</button>
+								  </div>
+								  <div class="modal-body">
+									<strong><em>Datenschutzerklärung auf einen Blick</em></strong>
+									<p></p>
+									<p><strong>Allgemeine Hinweise</strong></p>
+									<p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie unsere Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.</p>
+									<p></p>
+									<p><strong>Welche Daten erfasst diese Webseite?</strong></p>
+									<p></p>
+									<p>Wir erfassen ausschließlich die Daten von Ihnen, die Sie im Bestellformular eintragen. Es werden keine Daten automatisch von der Webseite erfasst.</p>
+									<p></p>
+									<p><strong>Was geschieht mit Ihren Daten?</strong></p>
+									<p></p>
+									<p>Wir verwenden Ihre angegbenen Daten, um Ihnen problemlos die Karten zu senden. Des weiteren verwenden wir die Daten zur identifizierung am Einlass.</p>
+									<p></p>
+									<p><strong>Was geschieht mit Ihren Daten nach dem Theater?</strong></p>
+									<p></p>
+									<p>Die erfassten Daten werden spätestens einen Monat nach Ablauf des letzten Vorstellungstermines aus unserer Datenbank unwiderruflich gelöscht.</p>
+									<p></p>
+									<p><strong>Allgemeine Hinweise</strong></p>
+									<p></p>
+									<p>Durch diese Webseite werden keinerlei Einnahmen durch Werbung oder sonstige Einnahmequellen generiert.</p>
+									<p></p>
+									<p>Der Betreiber dieser Seite nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie der Datenschutzerklärung</p>
+									<p></p>
+									<p>Folgende Daten werden auf dieser Webseite <u>ausschließlich</u> erfasst:</p>
+									<ul class="list-group list-group-flush">
+									  <li class="list-group-item">Vorname</li>
+									  <li class="list-group-item">Nachname</li>
+									  <li class="list-group-item">Anzahl der gebuchten Karten</li>
+									  <li class="list-group-item">E-Mail Adresse</li>
+									  <li class="list-group-item">gewählte Vorstellung</li>
+									</ul>
+								  </div>
+								  <div class="modal-footer">
+									<button type="button" class="btn btn-primary" data-dismiss="modal">Verstanden!</button>
+									</div>
+								</div>
+							  </div>
+							</div>
+							<!-- -->
+
+			</div>
+			<!-- Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</div>
+	<!-- /Pricing -->
+
+
+	<!-- Testimonial -->
+	<div id="testimonial" class="section md-padding">
+
+		<!-- Background Image -->
+		<div class="bg-img" style="background-image: url({% static 'booking/img/background3.jpg' %});">
+			<div class="overlay"></div>
+		</div>
+		<!-- /Background Image -->
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</div>
+	<!-- /Testimonial -->
+
+	<!-- Team -->
+	<div id="team" class="section md-padding">
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<!-- Section header -->
+				<div class="section-header text-center">
+					<h2 class="title">Das Technik Team</h2>
+				</div>
+				<!-- /Section header -->
+
+				<!-- team -->
+				<div class="col-sm-4">
+					<div class="team">
+						<div class="team-img">
+							<img class="img-responsive" src="{% static 'booking/img/team1.jpg' %}" alt="">
+							<div class="overlay">
+							</div>
+						</div>
+						<div class="team-content">
+							<h3>Luka Rode</h3>
+							<span>Web Design | Tontechnik/-mastering | Bühnenbau</span>
+						</div>
+					</div>
+				</div>
+				<!-- /team -->
+
+				<!-- team -->
+				<div class="col-sm-4">
+					<div class="team">
+						<div class="team-img">
+							<img class="img-responsive" src="{% static 'booking/img/team2.jpg' %}" alt="">
+							<div class="overlay">
+							</div>
+						</div>
+						<div class="team-content">
+							<h3>Florian Dankmer</h3>
+							<span>Film-/Tonschnitt | Lichttechnik | Bühnenbau</span>
+						</div>
+					</div>
+				</div>
+				<!-- /team -->
+
+				<!-- team -->
+				<div class="col-sm-4">
+					<div class="team">
+						<div class="team-img">
+							<img class="img-responsive" src="{% static 'booking/img/team3.jpg' %}" alt="">
+							<div class="overlay">
+							</div>
+						</div>
+						<div class="team-content">
+							<h3>Annette Braak</h3>
+							<span>Lehrerin | Regisseurin</span>
+						</div>
+					</div>
+				</div>
+				<!-- /team -->
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</div>
+	<!-- /Team -->
+
+	<!-- Blog -->
+	<div id="blog" class="md-padding bg-grey">
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<!-- Section header -->
+				<div class="section-header text-center">
+					<h2 class="title">Ort der Veranstaltung</h2>
+				</div>
+				<!-- /Section header -->
+
+				<h3 class="text-center">In der kleinen Sporthalle der Schule am Eiderwald</h3>
+
+				<!--Google map-->
+				<div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 500px">
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2331.499703438065!2d10.054635316094636!3d54.242042614942406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b253ce2a8a56e3%3A0x89b4f30e6c2afc5d!2sSchule+am+Eiderwald+Flintbek+Grund-+und+Gemeinschaftsschule!5e0!3m2!1sde!2sde!4v1551534208261" frameborder="0"
+				 style="border:0" height="400px" width="100%"></iframe>
+				</div>
+				<!--Google Maps-->
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</div>
+	<!-- /Blog -->
+
+	<!-- Contact -->
+	<div id="contact" class="section md-padding">
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<!-- Section-header -->
+				<div class="section-header text-center">
+					<h2 class="title">Karten Bestellen</h2>
+				</div>
+				<!-- /Section-header -->
+
+				<!-- contact -->
+				<div class="col-sm-4">
+					<div class="contact">
+						<i class="fa fa-phone"></i>
+						<h3>Telefon</h3>
+						<p>04347-905-221</p>
+					</div>
+				</div>
+				<!-- /contact -->
+
+				<!-- contact -->
+				<div class="col-sm-4">
+					<div class="contact">
+						<i class="fa fa-envelope"></i>
+						<h3>Email</h3>
+						<p>luka.elias.rode@gmail.com</p>
+					</div>
+				</div>
+				<!-- /contact -->
+
+				<!-- contact -->
+				<div class="col-sm-4">
+					<div class="contact">
+						<i class="fa fa-map-marker"></i>
+						<h3>Addresse</h3>
+						<p>Brückenstr. 24</p>
+					</div>
+				</div>
+				<!-- /contact -->
+
+				<!--Booking Btn -->
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-primary btn-lg btn-block center-block" data-toggle="modal" data-target="#bookingModal">
+					  Karten buchen
+					</button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="bookingModalTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h5 class="modal-title" id="booking_text">Buchung</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							  <span aria-hidden="true">&times;</span>
+							</button>
+						  </div>
+						  <div class="modal-body">
+
+							  <!-- Bootstrap Form -->
+							  	<form>
+								  <div class="form-group">
+									<label for="id_first_name">Vorname</label>
+									<input type="text" class="form-control" maxlength="200" required id="id_first_name" aria-describedby="emailHelp" placeholder="Vorname">
+									<small id="emailHelp" class="form-text text-muted">Informationen über den Schutz Ihrer Daten, finden Sie in der Datenschutzerklärung.</small>
+								  </div>
+
+								  <div class="form-group">
+									<label for="id_last_name">Nachname</label>
+									<input type="text" class="form-control" required id="id_last_name" placeholder="Nachname">
+								  </div>
+
+								  <div class="form-group">
+									<label for="id_number_of_tickets">Anzahl</label>
+									<input type="number" class="form-control" value="0" required id="id_number_of_tickets">
+								  </div>
+
+								  <div class="form-group">
+									<label for="id_email">E-Mail Adresse</label>
+									<input type="email" maxlength="254" class="form-control" required id="id_email" placeholder="Geben Sie ihre E-Mail Adresse ein.">
+								  </div>
+
+								  <div class="form-group">
+									<label for="id_performance">Vorstellung</label>
+									<select class="form-control" required id="id_performance">
+									  <option value="1">Vorstellung 1 (Noch 7 tickets verfügbar)</option>
+									  <option value="2">Vorstellung 2 (Noch 17 tickets verfügbar)</option>
+									</select>
+								  </div>
+
+								  <div class="form-check">
+									<input type="checkbox" class="form-check-input" required id="SecruityCheck">
+									<label class="form-check-label" for="SecruityCheck">Ich akzeptiere die Datenschutzerklärung</label>
+								  </div>
+
+								  <tr>
+								  <td>&nbsp;</td>
+								  <td id="booking_button"><input class="btn btn-primary" id="booking_button_only" type="submit" value="Jetzt buchen!"></td></tr>
+								</form>
+							  <!-- /Bootstrap Form -->
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+						  </div>
+						</div>
+					  </div>
+					</div>
+					<!-- /Booking Btn -->
+
+			</div>
+			<!-- /Row -->
+		</div>
+		<!-- /Container -->
+	</div>
+	<!-- /Contact -->
+
+
+	<!-- Footer -->
+	<footer id="footer" class="sm-padding bg-dark">
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<div class="col-md-12">
+
+					<!-- footer logo -->
+					<div class="footer-logo">
+						<a href="index.html"><img src="{% static 'booking/img/logo.png' %}" alt="logo"></a>
+					</div>
+					<!-- /footer logo -->
+
+					<!-- footer copyright -->
+					<div class="footer-copyright">
+						<p>Copyright © 2018. All Rights Reserved. Design von Luka Rode | 10b</p>
+						<p><button type="button" class="btn btn-info" data-toggle="modal" data-target="#secruity">Datenschutzerklärung</button></p>
+					</div>
+					<!-- /footer copyright -->
+
+				</div>
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</footer>
+	<!-- /Footer -->
+
+	<!-- Back to top -->
+	<div id="back-to-top"></div>
+	<!-- /Back to top -->
+
+	<!-- Preloader -->
+	<div id="preloader">
+		<div class="preloader">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<!-- /Preloader -->
+
+	<!-- jQuery Plugins -->
+	<script type="text/javascript" src="{% static 'booking/js/jquery.min.js' %}"></script>
+	<!-- jQuery Plugins -->
+	<script type="text/javascript" src="{% static 'booking/js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'booking/js/owl.carousel.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'booking/js/jquery.magnific-popup.js' %}"></script>
+	<script type="text/javascript" src="{% static 'booking/js/main.js' %}"></script>
+
+</body>
+
 </html>
