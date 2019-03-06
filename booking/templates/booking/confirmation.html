@@ -1,20 +1,133 @@
-    <div id="fh5co-project">
-        <div class="container">
-            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading  animate-box">
-                <span>Bestellung</span>
-                <h2>Vielen Dank für Ihre Bestellung</h2>
-                <p>Sie haben {{ booking.number_of_tickets }} Tickets für {{ booking.performance.title }}
-                    am {{ booking.performance.start_date }} gebucht. Die Vorstellung beginnt um {{ booking.performance.start_time }} Uhr.
-                    Diese Bestätigung wurde auch per E-Mail an {{ booking.email }} versendet.</p>
-                <p>Sie können sich ihre Tickets auch gleich hier herunterladen:</p>
-                <p>
-                    {% for ticket in tickets %}
-                        <a href="{% url 'booking:pdf' ticket.code %}">Ticket {{ ticket.code }}</a><br/>
-                    {% endfor %}
-                </p>
-                <div class="js-top">
-                    <a href="{% url 'booking:index' %}">Zurück zur Startseite</a>
-                </div>
-            </div>
-        </div>
-    </div>
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Romeo und Julia | Theater des WPU Gestalten der Jahrgänge 10 und 7</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="{% static 'booking/css/bootstrap.min.css' %}" />
+
+	<!-- Owl Carousel -->
+	<link type="text/css" rel="stylesheet" href="{% static 'booking/css/owl.carousel.css' %}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'booking/css/owl.theme.default.css' %}" />
+
+	<!-- Magnific Popup -->
+	<link type="text/css" rel="stylesheet" href="{% static 'booking/css/magnific-popup.css' %}" />
+
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="{% static 'booking/css/font-awesome.min.css' %}">
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="{% static 'booking/css/style.css' %}" />
+
+	<!-- Icon -->
+	<link rel="shortcut icon" href="{% static 'booking/img/icon.ico' %}"/>
+</head>
+
+<body>
+	<!-- Header -->
+	<header>
+
+
+		<!-- Title -->
+	<div class="sm-padding bg-grey">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h2 class="">Vielen Dank Für Ihre Bestellung</h2>
+					<h3 class="title">Sie erhalten in kürze eine E-Mail mit ihren gebuchten Karten.</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+	</header>
+	<!-- /Header -->
+
+	<div class="section md-padding">
+		<div class="container">
+			<div class="row">
+				<div class="section-header text-center">
+					<h3>Sie haben {{ booking.number_of_tickets }} Tickets für {{ booking.performance.title }}
+                    am {{ booking.performance.start_date }} gebucht. Die Vorstellung beginnt um {{ booking.performance.start_time }} Uhr.</h3>
+
+					<div class="sm-padding">
+						<div class="panel-body"><h2>Links zu der/den gebuchten Theaterkarte/-n:</h2></div>
+						<div class="panel-body">
+							<ul class="list-unstyled">
+                                {% for ticket in tickets %}
+                                    <li><h3><a href="{% url 'booking:pdf' ticket.code %}">Ticket {{ ticket.code }}</a></h3></li>
+                                {% endfor %}
+							</ul>
+						</div>
+					</div>
+					<a href="{% url 'booking:index' %}"><button class="btn btn-lg btn-info">Startseite</button></a>
+					<a href="{% url 'booking:index' %}#team"><button class="btn btn-lg btn-success">Mehr Informationen</button></a>
+				</div>
+		</div>
+			<!-- /Row -->
+		</div>
+		<!-- /Container -->
+
+		<div class="sm-padding bg-grey">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h2 class="title">Infos über das Theater</h2>
+					<p>Romeo und Julia gelten als das berühmteste Liebespaar der Weltliteratur. Der Gestaltenkurs der
+						Jahrgangsstufe 10 unter Mitwirkung der Jahrgangsstufe 7 hat sich zum Abschluss ihres Kurses
+						vorgenommen, den schon zahlreich in Bühnenaufführungen und Filmen verarbeiteten Stoff in einer neuen
+						eigenen Version auf die Bühne zu bringen.
+						In Anlehnung an das Original wird die gekürzte ursprüngliche Handlung der Tragödie -sozusagen
+						crossover- parallel und abwechselnd in die heutige Zeit übertragen.
+						William Shakespeares Tragödie „Romeo und Julia“ wurde 1597 zum ersten Mal in London aufgeführt.
+						Die jeweils einzigen Kinder der mächtigen Familien Montague und Capulet in Verona verlieben sich
+						ineinander, aber die lange bestehende Feindschaft zwischen den Familien beschwert ihre Liebe und treibt
+						Romeo und Julia in den Selbstmord. Erst danach versöhnen sich die Familien.
+						Die Motive für das Stück reichen bis in die Dramen der Antike zurück, sind aber bis in die heutige Zeit
+						ein immer wiederkehrendes Thema.
+						Durch unsere Aufführung erfolgt eine Spiegelung in die heutige Zeit und zeigt eine immerwährende
+						Übertragbarkeit von Liebesbeziehungen in alle Gesellschaftsebenen.
+						Welche Faktoren könnten hierbei heutzutage eine Rolle spielen?</p>
+						<p>Religion?</p>
+						<p>Arm oder Reich?</p>
+						<p>Gender/Homosexualität?</p>
+						<p>Verbotene Liebe?</p>
+						<p>Kulturkreis?</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	</div>
+	<!-- /About -->
+
+	<!-- Preloader -->
+	<div id="preloader">
+		<div class="preloader">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<!-- /Preloader -->
+
+	<!-- jQuery Plugins -->
+	<script type="text/javascript" src="{% static 'booking/js/jquery.min.js' %}"></script>
+	<!-- jQuery Plugins -->
+	<script type="text/javascript" src="{% static 'booking/js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'booking/js/owl.carousel.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'booking/js/jquery.magnific-popup.js' %}"></script>
+	<script type="text/javascript" src="{% static 'booking/js/main.js' %}"></script>
+
+</body>
+
+</html>
