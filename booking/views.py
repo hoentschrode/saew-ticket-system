@@ -30,7 +30,6 @@ def confirmation(request, booking_code):
         request,
         'booking/confirmation.html',
         context={
-            'current_view': 'booking',
             'booking': booking,
             'tickets': tickets
         }
@@ -74,12 +73,23 @@ class BookingView(View):
     template_name = "booking/base.html"
 
     def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        number_of_tickets_available_per_performance = []
+        number_of_tickets_booked_total = 0
+        number_of_tickets_available_total = 0
+        for performance in Performance.objects.all():
+            number_of_tickets_available_per_performance.append(performance.tickets_available())
+            number_of_tickets_booked_total += performance.capacity - performance.tickets_available()
+            number_of_tickets_available_total += performance.tickets_available()
+
         return render(
             request,
             self.template_name,
             context={
-                'current_view': 'booking',
-                'form': self.form_class()
+                'number_of_tickets_available_per_performance': number_of_tickets_available_per_performance,
+                'number_of_tickets_booked_total': number_of_tickets_booked_total,
+                'number_of_tickets_available_total': number_of_tickets_available_total,
+                'form': form
             }
         )
 
@@ -109,7 +119,7 @@ class BookingView(View):
 
             send_confirmation_mail(request, booking)
 
-            return HttpResponseRedirect(reverse('booking:confirmation', args=(booking.code,), ) + '#order_confirmation')
+            return HttpResponseRedirect(reverse('booking:confirmation', args=(booking.code,)))
         else:
             return render(request, self.template_name, context={'form': form})
 

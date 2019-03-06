@@ -1,4 +1,5 @@
 {% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="de">
 
@@ -441,7 +442,7 @@
 				<div class="col-sm-3 col-xs-6">
 					<div class="number">
 						<i class="fa fa-users"></i>
-						<h3 class="white-text"><span class="counter">0</span></h3>
+						<h3 class="white-text"><span class="counter">{{ number_of_tickets_booked_total }}</span></h3>
 						<span class="white-text">Karten bestellt</span>
 					</div>
 				</div>
@@ -451,7 +452,7 @@
 				<div class="col-sm-3 col-xs-6">
 					<div class="number">
 						<i class="fa fa-trophy"></i>
-						<h3 class="white-text"><span class="counter">200</span></h3>
+						<h3 class="white-text"><span class="counter">{{ number_of_tickets_available_total }}</span></h3>
 						<span class="white-text">Verfügbare Karten</span>
 					</div>
 				</div>
@@ -461,7 +462,7 @@
 				<div class="col-sm-3 col-xs-6">
 					<div class="number">
 						<i class="fa fa-pencil"></i>
-						<h3 class="white-text"><span class="counter">100</span></h3>
+						<h3 class="white-text"><span class="counter">{{ number_of_tickets_available_per_performance.0 }}</span></h3>
 						<span class="white-text">Freie Karten für Vorstellung 1</span>
 					</div>
 				</div>
@@ -471,7 +472,7 @@
 				<div class="col-sm-3 col-xs-6">
 					<div class="number">
 						<i class="fa fa-pencil"></i>
-						<h3 class="white-text"><span class="counter">100</span></h3>
+						<h3 class="white-text"><span class="counter">{{ number_of_tickets_available_per_performance.1 }}</span></h3>
 						<span class="white-text">Freie Karten für Vorstellung 2</span>
 					</div>
 				</div>
@@ -803,35 +804,31 @@
 						  <div class="modal-body">
 
 							  <!-- Bootstrap Form -->
-							  	<form>
-								  <div class="form-group">
-									<label for="id_first_name">Vorname</label>
-									<input type="text" class="form-control" maxlength="200" required id="id_first_name" aria-describedby="emailHelp" placeholder="Vorname">
-									<small id="emailHelp" class="form-text text-muted">Informationen über den Schutz Ihrer Daten, finden Sie in der Datenschutzerklärung.</small>
-								  </div>
-
-								  <div class="form-group">
-									<label for="id_last_name">Nachname</label>
-									<input type="text" class="form-control" required id="id_last_name" placeholder="Nachname">
-								  </div>
-
-								  <div class="form-group">
-									<label for="id_number_of_tickets">Anzahl</label>
-									<input type="number" class="form-control" value="0" required id="id_number_of_tickets">
-								  </div>
-
-								  <div class="form-group">
-									<label for="id_email">E-Mail Adresse</label>
-									<input type="email" maxlength="254" class="form-control" required id="id_email" placeholder="Geben Sie ihre E-Mail Adresse ein.">
-								  </div>
-
-								  <div class="form-group">
-									<label for="id_performance">Vorstellung</label>
-									<select class="form-control" required id="id_performance">
-									  <option value="1">Vorstellung 1 (Noch 7 tickets verfügbar)</option>
-									  <option value="2">Vorstellung 2 (Noch 17 tickets verfügbar)</option>
-									</select>
-								  </div>
+							  	<form action="{% url 'booking:index' %}#booking_form" method="post">
+                                    {% csrf_token %}
+                                    {% for hidden_field in form.hidden_fields %}
+                                        {{ hidden_field }}
+                                    {% endfor %}
+                                    {% for field in form.visible_fields %}
+                                        <div class="form-group">
+                                        {{ field.label_tag }}
+                                        {% if form.is_bound %}
+                                            {% if field.errors %}
+                                                {% render_field field class="form-control is-invalid" %}
+                                                {% for error in field.errors %}
+                                                    <div class="invalid-feedback">{{ error }}</div>
+                                                {% endfor %}
+                                            {% else %}
+                                                {% render_field field class="form-control is-valid" %}
+                                            {% endif %}
+                                            {% if field.help_text %}
+                                                <small class="form-text-text-muted">{{ field.help_text }}</small>
+                                            {% endif %}
+                                        {% else %}
+                                            {% render_field field class="form-control" %}
+                                        {% endif %}
+                                        </div>
+                                    {% endfor %}
 
 								  <div class="form-check">
 									<input type="checkbox" class="form-check-input" required id="SecruityCheck">
@@ -916,6 +913,14 @@
 	<script type="text/javascript" src="{% static 'booking/js/owl.carousel.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'booking/js/jquery.magnific-popup.js' %}"></script>
 	<script type="text/javascript" src="{% static 'booking/js/main.js' %}"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        {% if form.is_bound and not form.is_valid %}
+            $('#bookingModal').modal('show');
+        {%  endif %}
+    });
+    </script>
 
 </body>
 

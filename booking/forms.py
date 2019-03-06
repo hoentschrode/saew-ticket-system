@@ -1,4 +1,4 @@
-from django.forms import ModelForm, ChoiceField, CharField
+from django.forms import ModelForm, ChoiceField, CharField, TextInput
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Booking, Performance
 
@@ -17,7 +17,8 @@ def get_performance_choices():
 
 class BookingForm(ModelForm):
     performance = ChoiceField(choices=get_performance_choices(), label='Vorstellung')
-    email_confirmation = CharField(max_length=254, required=True, label='E-Mail (zur Bestätigung)')
+    email_confirmation = CharField(max_length=254, required=True, label='E-Mail (zur Bestätigung)',
+                                   widget=TextInput(attrs={'placeholder': 'Geben Sie Ihre E-Mail-Adresse erneut ein.'}))
     performance_model = None
 
     class Meta:
@@ -28,6 +29,17 @@ class BookingForm(ModelForm):
             'last_name': 'Nachname',
             'number_of_tickets': 'Anzahl:',
             'email': 'E-Mail-Adresse'
+        }
+        help_texts = {
+            'first_name': 'Informationen über den Schutz Ihrer Daten, finden Sie in der Datenschutzerklärung.',
+            'last_name': '',
+            'number_of_tickets': '',
+            'email': ''
+        }
+        widgets = {
+            'first_name': TextInput(attrs={'placeholder': 'Vorname'}),
+            'last_name': TextInput(attrs={'placeholder': 'Nachname'}),
+            'email': TextInput(attrs={'placeholder': 'Geben Sie Ihre E-Mail-Adresse ein.'})
         }
 
     def __init__(self, *args, **kwargs):

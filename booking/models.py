@@ -47,8 +47,8 @@ class Performance(Base):
 
 
 class Booking(Base):
-    first_name = models.CharField(max_length=200, help_text="First name")
-    last_name = models.CharField(max_length=200, help_text='Last name')
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
     email = models.EmailField()
     booking_date = models.DateTimeField(auto_now_add=True)
     performance = models.ForeignKey(Performance, on_delete=models.CASCADE)
@@ -70,4 +70,3 @@ class Ticket(Base):
     code = models.CharField(max_length=10, unique=True)
     booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
     check_in_flag = models.BooleanField(default=False)
-
