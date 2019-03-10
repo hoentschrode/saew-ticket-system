@@ -77,7 +77,9 @@ class BookingView(View):
         number_of_tickets_available_per_performance = []
         number_of_tickets_booked_total = 0
         number_of_tickets_available_total = 0
-        for performance in Performance.objects.all():
+
+        performances = Performance.objects.all()
+        for performance in performances:
             number_of_tickets_available_per_performance.append(performance.tickets_available())
             number_of_tickets_booked_total += performance.capacity - performance.tickets_available()
             number_of_tickets_available_total += performance.tickets_available()
@@ -89,6 +91,7 @@ class BookingView(View):
                 'number_of_tickets_available_per_performance': number_of_tickets_available_per_performance,
                 'number_of_tickets_booked_total': number_of_tickets_booked_total,
                 'number_of_tickets_available_total': number_of_tickets_available_total,
+                'performances': performances,
                 'form': form
             }
         )

@@ -152,7 +152,7 @@
 					<div class="about">
 						<i class="fa fa-mobile"></i>
 						<h3>Modern trifft auf Klassik</h3>
-						<p>Die Schülerinnen und Schüler stellen ein wirklichen Klassiker in ihrer ganz eigenen Form zusammen, ohne jedoch dabei von der klassischen Handlung abzukommen.</p>
+						<p>Die Schülerinnen und Schüler stellen einen wirklichen Klassiker in ihrer ganz eigenen Form zusammen, ohne jedoch dabei von der klassischen Handlung abzukommen.</p>
 						<!--<a href="#">Read more</a>-->
 					</div>
 				</div>
@@ -293,7 +293,7 @@
 
 				<ul class="list-group list-group-flush">
 					<div class="list-group"><a href="#" class="list-group-item list-group-item-action list-group-item-dark">10. Jahrgang</a></div>
-					<li class="list-group-item">Emily Seelmann</li>
+					<li class="list-group-item">Emily Seelemann</li>
 					<li class="list-group-item">Angelina Janetzki</li>
 					<li class="list-group-item">Jacob Jüttner</li>
 					<li class="list-group-item">Gina Knese</li>
@@ -313,7 +313,7 @@
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item">Moritz Ertelt</li>
 					<li class="list-group-item">Carolina Frank</li>
-					<li class="list-group-item">Jennys Rudat</li>
+					<li class="list-group-item">Jannys Rudat</li>
 					<li class="list-group-item">Lukas Klug</li>
 					<li class="list-group-item">Tim Keller</li>
 					<li class="list-group-item">Jürgen Grass</li>
@@ -739,6 +739,49 @@
 
 	</div>
 	<!-- /Blog -->
+
+    <!-- Wann? -->
+	<div class="md-padding">
+
+		<!-- Container -->
+		<div class="container">
+
+			<!-- Row -->
+			<div class="row">
+
+				<!-- Section header -->
+				<div class="section-header text-center">
+					<h2 class="title">Datum und Uhrzeit der Vorstellungen</h2>
+				</div>
+				<!-- /Section header -->
+                <div class="col-lg-1"></div>
+
+                {% for performance in performances %}
+
+                    <!-- about -->
+                    <div class="col-lg-5">
+                        <div class="about">
+                            <i class="fa fa-magic" style="color: red"></i>
+                            <h3>{{ performance.title }}</h3>
+                            <p>{{ performance.start_date }}<br/>um {{ performance.start_time }}</p>
+                            <!-- <a href="#">Read more</a> -->
+                        </div>
+                    </div>
+                    <!-- /about -->
+                {% endfor %}
+
+
+				<!-- /about -->
+                <div class="col-lg-1"></div>
+
+			</div>
+			<!-- /Row -->
+
+		</div>
+		<!-- /Container -->
+
+	</div>
+	<!-- /Wann? -->
 
 	<!-- Contact -->
 	<div id="contact" class="section md-padding">
